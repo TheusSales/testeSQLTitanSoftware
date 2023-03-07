@@ -1,0 +1,52 @@
+TESTE SQL
+
+1. INSERT INTO produtos (cod_prod, loj_prod, desc_prod, dt_inclu_prod, preco_prod)
+VALUES (170, 2, 'LEITE CONDESADO MOCOCA', '2010-12-30', 45.4);
+
+2. UPDATE produtos
+SET preco_prod = 95.4
+WHERE cod_prod = 170 AND loj_prod = 2;
+
+3. SELECT *
+FROM produtos
+WHERE loj_prod IN (1, 2);
+
+4. SELECT MAX(dt_inclu_prod) AS max_data, MIN(dt_inclu_prod) AS min_data
+FROM produtos;
+
+5.SELECT COUNT(*) AS qtd_registros
+FROM produtos;
+
+6.SELECT *
+FROM produtos
+WHERE desc_prod LIKE 'L%';
+
+7. SELECT loj_prod, SUM(preco_prod) AS total_por_loja
+FROM produtos
+GROUP BY loj_prod;
+
+9.SELECT loj_prod, SUM(preco_prod) AS total_por_loja
+FROM produtos
+GROUP BY loj_prod
+HAVING SUM(preco_prod) > 100000;
+
+10. SELECT P.loj_prod, L.desc_loj, P.Cód_prod, P.desc_prod, P.preco_prod, E.qtd_prod
+FROM Produtos P
+INNER JOIN Estoque E ON P.Cód_prod = E.Cód_prod AND P.loj_prod = E.loj_prod
+INNER JOIN Lojas L ON P.loj_prod = L.loj_prod
+WHERE P.loj_prod = 1;
+
+
+11. SELECT P.Cód_prod, P.desc_prod
+FROM Produtos P
+LEFT JOIN Estoque E ON P.Cód_prod = E.Cód_prod AND P.loj_prod = E.loj_prod
+WHERE E.Cód_prod IS NULL;
+
+
+12. SELECT E.Cód_prod, E.loj_prod
+FROM Estoque E
+LEFT JOIN Produtos P ON P.Cód_prod = E.Cód_prod AND P.loj_prod = E.loj_prod
+WHERE P.Cód_prod IS NULL;
+
+
+
